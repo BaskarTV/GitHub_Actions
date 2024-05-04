@@ -8,13 +8,13 @@ def hello():
 
 @app.route('/home')
 def home():
-    return 'Home page'
+    return 'Hello world'
 # GitAction WorkFlow is successfull working
 
 #app.run(port=5000, debug=True)
 
 #changed user now trial -5
 
-@app.rout('/test')
+@app.route('/test')
 def test():
     return 'test page'
