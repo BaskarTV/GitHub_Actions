@@ -14,3 +14,7 @@ def home():
 #app.run(port=5000, debug=True)
 
 #changed user now trial -5
+
+@app.rout('/test')
+def test():
+    return 'test page'
