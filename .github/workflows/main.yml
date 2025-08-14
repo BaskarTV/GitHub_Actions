@@ -6,20 +6,23 @@ on:
 
 jobs:
   Deploy:
+    name: Deploy to Ec2
     runs-on: ubuntu-latest
+
     steps:
-      - name: Deploy to EC2
-        env:
+    - name: Deploy in EC2
+      env:
           PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          HOST_NAME: ${{ secrets.HOST_NAME }}
-          USER_NAME: ${{ secrets.USER_NAME }}
-        run: |
+          HOST_NAME : ${{ secrets.HOST_NAME }}
+          USER_NAME : ${{ secrets.USER_NAME }}
+
+      run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} << 'EOF'
-            cd /home/trinipi/GitHub_Actions
-            git pull
-            source .venv/bin/activate
-            pip install -r requirements.txt
-            sudo systemctl restart gitactions
-            sudo systemctl status gitactions --no-pager
-          EOF
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
+          ls &&
+          cd /mnt/data/GitHub_Actions/ &&
+          ls &&
+          git pull &&
+          sudo systemctl stop flaskapp &&
+          sudo systemctl daemon-reload &&
+          sudo systemctl start flaskapp"
