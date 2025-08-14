@@ -17,7 +17,7 @@ def test():
     return 'Test page'
 
 
-# test one
+# test local to server
 
 #app.run(port=5000, debug=True)
 
